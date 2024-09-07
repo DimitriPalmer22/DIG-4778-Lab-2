@@ -27,5 +27,12 @@ public class CubeEditor : Editor
             // Select all the cubes
             Selection.objects = cubeScripts;
         }
+        
+        // Create another button to clear the selection
+        if (GUILayout.Button("Clear Selection"))
+        {
+            // Reset the selection to an empty array
+            Selection.objects = new Object[0];
+        }
     }
 }
