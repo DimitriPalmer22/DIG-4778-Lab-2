@@ -1,12 +1,23 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
+using Object = UnityEngine.Object;
+
+[ExecuteInEditMode]
 
 public class SphereScript : MonoBehaviour
 {
     [SerializeField] public float radius = 1;
+
+    private void OnValidate()
+    {
+        // scale increases proportional to radius
+        transform.localScale = Vector3.one * radius;
+    }
 }
 
 [CustomEditor(typeof(SphereScript))] // Allows this editor to be used with the SphereScript class
@@ -15,6 +26,19 @@ public class SphereEditor : Editor
 {
     public override void OnInspectorGUI()
     {
+        // reference to SphereScript and objects containing it 
+        SphereScript Sphere = (SphereScript)target;
+        
+        // checks if radius is less than one 
+        if (Sphere.radius < 1)
+        {
+            // if so show warning in Inspector
+            EditorGUILayout.HelpBox("The spheres' radius cannot be smaller than 1!", MessageType.Warning);
+        }
+
+        // makes sure radius appears in inspector
+        DrawDefaultInspector();
+
         // Make the buttons appear side by side
         EditorGUILayout.BeginHorizontal();
 
@@ -66,4 +90,5 @@ public class SphereEditor : Editor
         // Reset the background color to the original color
         GUI.backgroundColor = originalBackgroundColor;
     }
+    
 }

@@ -7,6 +7,11 @@ using UnityEngine;
 public class CubeScript : MonoBehaviour
 {
     [SerializeField] public float size = 1;
+    private void OnValidate()
+    {
+        // scale increases proportional to size
+        transform.localScale = Vector3.one * size;
+    }
 }
 
 
@@ -16,6 +21,19 @@ public class CubeEditor : Editor
 {
     public override void OnInspectorGUI()
     {
+        // reference to CubeScript and objects containing it 
+        CubeScript cube = (CubeScript)target;
+        
+        //checks if cube size is larger than 2 
+        if (cube.size > 2)
+        {
+            // if so show warning in Inspector
+            EditorGUILayout.HelpBox("The cubes' sizes cannot be bigger than 2!", MessageType.Warning);
+        }
+        
+        //makes size appear in inspector
+        DrawDefaultInspector();
+        
         // Make the buttons appear side by side
         EditorGUILayout.BeginHorizontal();
 
