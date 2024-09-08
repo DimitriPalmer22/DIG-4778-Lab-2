@@ -8,7 +8,6 @@ using UnityEngine.UIElements;
 using Object = UnityEngine.Object;
 
 [ExecuteInEditMode]
-
 public class SphereScript : MonoBehaviour
 {
     [SerializeField] public float radius = 1;

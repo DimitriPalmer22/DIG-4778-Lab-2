@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
+[ExecuteInEditMode]
 public class CubeScript : MonoBehaviour
 {
     [SerializeField] public float size = 1;
